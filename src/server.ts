@@ -1,19 +1,19 @@
 import express from "express";
 import cors from "cors";
+import appRouter from "./routes/appRoute.js"
 import chatRouter from "./routes/chatRoute.js";
+import { logger } from "./middlewares/logger.js";
 
 const app = express();
 
-app.use(cors({
-  origin: process.env.CLIENT_URL,
-  credentials: true,
-}))
+//middlewares
+app.use(cors({ origin: process.env.CLIENT_URL, credentials: true }))
 app.use(express.json());
+app.use(logger)
 
-app.get("/api", (req, res) => {
-  return res.status(200).json({ success: true, message: "All systems are working fine. "})
-})
 
+//routes
+app.use("/", appRouter)
 app.use("/api/chat", chatRouter)
 
 const PORT = process.env.PORT || 5000;
