@@ -7,8 +7,9 @@
   "type": "module",
   "main": "server.js",
   "scripts": {
+    "build": "tsc",
     "dev": "tsc && nodemon dist/server.js",
-    "start": "tsc && node dist/server.js"
+    "start": "node dist/server.js"
   },
   "devDependencies": {
     "@types/express": "^5.0.6",
