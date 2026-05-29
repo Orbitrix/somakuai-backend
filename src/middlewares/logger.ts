@@ -1,9 +1,19 @@
-import { Request, Response } from "express";
-import { getTime } from "../utils/helpers.js";
+import { Request, Response, NextFunction } from 'express'
 
-export const logger = (req: Request, res: Response, next: any) => {
-  const time = getTime()
-  console.log(`${time} -- ${req.method} ${req.path} -- (${req.ip})`);
+const logger = (req: Request, res: Response, next: NextFunction) => {
+  const now = new Date()
+  const date = now.toLocaleDateString('en-GB')
+  const time = now.toLocaleTimeString('en-GB')
 
-  next();
+  console.log(`[${date} ${time}] ${req.method} ${req.path}`)
+
+  res.on('finish', () => {
+    console.log(
+      `[${date} ${time}] ${req.method} ${req.path} - ${res.statusCode} ${res.statusMessage}`
+    )
+  })
+
+  next()
 }
+
+export default logger
