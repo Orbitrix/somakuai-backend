@@ -12,7 +12,14 @@ const app = express();
 dotenv.config();
 
 //middlewares
-app.use(cors({ origin: process.env.CLIENT_URL, credentials: true }))
+app.use(cors({ 
+  origin: [
+    "http://localhost:3000",
+    "https://somakuai-frontend.vercel.app",
+    "https://somakuai-waitlist.vercel.app"
+  ], 
+  credentials: true 
+}))
 app.use(express.json());
 app.use(logger)
 
