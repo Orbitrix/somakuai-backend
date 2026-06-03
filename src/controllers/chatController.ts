@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { sendMessageToOpenAI } from "../service/openAIService.js";
+import { sendMessageToOpenAI } from "../services/openAIService.js";
 
 export const sendMessage = async (req: Request, res: Response) => {
   try {

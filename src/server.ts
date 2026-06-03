@@ -5,6 +5,7 @@ import appRouter from "./routes/appRoute.js"
 import chatRouter from "./routes/chatRoute.js";
 import subscribeRouter from "./routes/subscribeRoute.js";
 import logger from "./middlewares/logger.js";
+import rdb from "./config/redis.js";
 import { rateLimiter } from "./middlewares/limiter.js";
 import { connectDB } from "./config/db.js";
 
@@ -25,7 +26,19 @@ const PORT = process.env.PORT || 5000;
 
 const startServer = async () => {
   try {
+    //ping database
     await connectDB();
+
+    //connect to Redis
+    await new Promise<void>((resolve, reject) => {
+      rdb.on("ready", () => {
+        console.log("Connected to Redis");
+        resolve();
+      });
+      rdb.on("error", (err) => {
+        reject(err);
+      });
+    });
 
     app.listen(PORT, () => {
       console.log(`Server is running on port ${PORT}`);
