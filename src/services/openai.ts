@@ -1,7 +1,6 @@
 import OpenAI from "openai";
 import dotenv from "dotenv";
-import { appendMessages, type Message } from "../utils/coversations.js";
-import { getHistory } from "../utils/coversations.js";
+import { appendMessages, getHistory, type Message } from "./redis.js";
 
 dotenv.config();
 

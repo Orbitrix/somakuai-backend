@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { validateEmail } from "../utils/helpers.js";
-import { Subscriber } from "../models/subscriberModel.js";
+import { Subscriber } from "../models/subscriber.js";
 
 export const subscribeGuest = async (req: Request, res: Response) => {
   try {

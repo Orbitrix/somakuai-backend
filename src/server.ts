@@ -5,8 +5,8 @@ import appRouter from "./routes/appRoute.js"
 import chatRouter from "./routes/chatRoute.js";
 import subscribeRouter from "./routes/subscribeRoute.js";
 import logger from "./middlewares/logger.js";
-import { rateLimiter } from "./middlewares/limiter.js";
-import { connectDB } from "./config/db.js";
+import rateLimiter from "./middlewares/limiter.js";
+import connectDB from "./config/db.js";
 
 const app = express();
 dotenv.config();
@@ -32,7 +32,7 @@ const PORT = process.env.PORT || 5000;
 
 const startServer = async () => {
   try {
-    //ping database
+    //connect to database
     await connectDB();
 
     app.listen(PORT, () => {
